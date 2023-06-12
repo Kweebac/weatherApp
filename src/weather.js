@@ -1,3 +1,9 @@
+const day0 = {
+  dayOfWeek: document.querySelector("#day0 .dayOfWeek"),
+  avgTemp: document.querySelector("#day0 .avgTemp"),
+  tempDifference: document.querySelector("#day0 .tempDifference"),
+  weatherIcon: document.querySelector("#day0 .weatherIcon"),
+};
 const day1 = {
   dayOfWeek: document.querySelector("#day1 .dayOfWeek"),
   avgTemp: document.querySelector("#day1 .avgTemp"),
@@ -9,12 +15,6 @@ const day2 = {
   avgTemp: document.querySelector("#day2 .avgTemp"),
   tempDifference: document.querySelector("#day2 .tempDifference"),
   weatherIcon: document.querySelector("#day2 .weatherIcon"),
-};
-const day3 = {
-  dayOfWeek: document.querySelector("#day3 .dayOfWeek"),
-  avgTemp: document.querySelector("#day3 .avgTemp"),
-  tempDifference: document.querySelector("#day3 .tempDifference"),
-  weatherIcon: document.querySelector("#day3 .weatherIcon"),
 };
 
 function getDayName(data, dayIndex) {
@@ -43,24 +43,19 @@ async function getNext3DaysWeather(location) {
   return await fetchData.json();
 }
 
-async function populateDailyWeather(location) {
+async function populateDayWeather(day, index, location) {
   const data = await getNext3DaysWeather(location);
 
-  day1.dayOfWeek.textContent = getDayName(data, 0);
-  day2.dayOfWeek.textContent = getDayName(data, 1);
-  day3.dayOfWeek.textContent = getDayName(data, 2);
+  day.dayOfWeek.textContent = getDayName(data, index);
+  day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_c} °C`;
+  day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_c} to ${data.forecast.forecastday[index].day.maxtemp_c} °C`;
+  day.weatherIcon.src = data.forecast.forecastday[index].day.condition.icon;
+}
 
-  day1.avgTemp.textContent = `${data.forecast.forecastday[0].day.avgtemp_c} °C`;
-  day2.avgTemp.textContent = `${data.forecast.forecastday[1].day.avgtemp_c} °C`;
-  day3.avgTemp.textContent = `${data.forecast.forecastday[2].day.avgtemp_c} °C`;
-
-  day1.tempDifference.textContent = `${data.forecast.forecastday[0].day.mintemp_c} to ${data.forecast.forecastday[0].day.maxtemp_c} °C`;
-  day2.tempDifference.textContent = `${data.forecast.forecastday[1].day.mintemp_c} to ${data.forecast.forecastday[1].day.maxtemp_c} °C`;
-  day3.tempDifference.textContent = `${data.forecast.forecastday[2].day.mintemp_c} to ${data.forecast.forecastday[2].day.maxtemp_c} °C`;
-
-  day1.weatherIcon.src = data.forecast.forecastday[0].day.condition.icon;
-  day2.weatherIcon.src = data.forecast.forecastday[1].day.condition.icon;
-  day3.weatherIcon.src = data.forecast.forecastday[2].day.condition.icon;
+async function populateDailyWeather(location) {
+  populateDayWeather(day0, 0, location);
+  populateDayWeather(day1, 1, location);
+  populateDayWeather(day2, 2, location);
 }
 
 export { populateDailyWeather };

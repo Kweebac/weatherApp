@@ -9,9 +9,9 @@ body {
 }
 
 /**********************
-* FOOTER 
+* HEADER 
 **********************/
-footer {
+header {
   padding: 2rem 0 2rem 0;
 }
 
@@ -21,6 +21,7 @@ footer {
   grid-auto-flow: column;
   grid-template-columns: repeat(7, 8rem);
   justify-content: space-around;
+  gap: 1rem;
 }
 
 /* HOURLY */
@@ -48,4 +49,39 @@ footer {
   width: 2.5rem;
   height: 2.5rem;
   margin-top: 0.5rem;
+}
+
+/**********************
+* MAIN 
+**********************/
+/* BUTTONS */
+.buttons {
+  display: grid;
+  justify-content: center;
+  grid-auto-flow: column;
+}
+
+main button {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dailyButton,
+.hourlyButton {
+  width: 6rem;
+  height: 2.5rem;
+
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+.dailyButton {
+  margin-right: 0.8rem;
+  border: 2px solid black;
+}
+main button:last-child {
+  font-weight: 300;
+  font-size: 1.2rem;
+  width: 7rem;
+  margin-left: max(5rem, 7vw);
 }

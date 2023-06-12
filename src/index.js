@@ -12,6 +12,8 @@ Change the look of the page based on data (change color of background or images 
   Use DevTools to test for low-end devices.
 */
 
+import { addEventListeners } from "./DOM";
 import { populateDailyWeather } from "./weather";
 
+addEventListeners();
 populateDailyWeather("london");
