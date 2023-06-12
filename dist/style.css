@@ -1,0 +1,12 @@
+body {
+  background: url(./images/juli-kosolapova-pZ-XFIrJMtE-unsplash.jpg) no-repeat center center
+    fixed;
+  background-size: cover;
+}
+
+/* DAILY */
+
+/* HOURLY */
+.hourly {
+  visibility: hidden;
+}
