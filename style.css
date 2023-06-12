@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url(./images/juli-kosolapova-pZ-XFIrJMtE-unsplash.jpg) no-repeat center center
+  background: url(../images/juli-kosolapova-pZ-XFIrJMtE-unsplash.jpg) no-repeat center center
     fixed;
   background-size: cover;
 }
@@ -19,7 +19,7 @@ footer {
 .daily {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(7, 6.5rem);
+  grid-template-columns: repeat(7, 8rem);
   justify-content: space-around;
 }
 
