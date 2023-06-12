@@ -12,7 +12,7 @@ Change the look of the page based on data (change color of background or images 
   Use DevTools to test for low-end devices.
 */
 
-async function getNextThreeDaysWeather(location) {
+async function getNext3DaysWeather(location) {
   const fetchData = await fetch(
     `https://api.weatherapi.com/v1/forecast.json?key=3cd48fd5a1fe4c29b92135531230806&q=${location}`
   );
@@ -20,5 +20,5 @@ async function getNextThreeDaysWeather(location) {
 }
 
 (async function main() {
-  console.log(await getNextThreeDaysWeather("london"));
+  console.log(await getNext3DaysWeather("london"));
 })();

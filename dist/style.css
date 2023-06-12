@@ -1,12 +1,51 @@
+:root {
+  font-family: sans-serif;
+}
+
 body {
   background: url(./images/juli-kosolapova-pZ-XFIrJMtE-unsplash.jpg) no-repeat center center
     fixed;
   background-size: cover;
 }
 
+/**********************
+* FOOTER 
+**********************/
+footer {
+  padding: 2rem 0 2rem 0;
+}
+
 /* DAILY */
+.daily {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(7, 6.5rem);
+  justify-content: space-around;
+}
 
 /* HOURLY */
 .hourly {
+  position: absolute;
   visibility: hidden;
+}
+
+/* BOTH */
+.time,
+.dayOfWeek {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.avgTemp {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.tempDifference {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.weatherIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-top: 0.5rem;
 }
