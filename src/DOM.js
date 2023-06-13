@@ -1,5 +1,7 @@
+import { celcius } from "./eventListeners";
 import { getNext3DaysWeather } from "./fetchWeatherData";
 
+// DAILY
 const day0 = {
   dayOfWeek: document.querySelector("#day0 .dayOfWeek"),
   avgTemp: document.querySelector("#day0 .avgTemp"),
@@ -37,21 +39,44 @@ function getDayName(data, dayIndex) {
     : "Saturday";
 }
 
-async function populateDayWeather(day, index, location) {
-  const data = await getNext3DaysWeather(location);
-
+async function populateDayWeather(day, index, data) {
   day.dayOfWeek.textContent = getDayName(data, index);
-  day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_c} °C`;
-  day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_c} to ${data.forecast.forecastday[index].day.maxtemp_c} °C`;
+  if (celcius) {
+    day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_c} °C`;
+    day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_c} to ${data.forecast.forecastday[index].day.maxtemp_c} °C`;
+  } else {
+    day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_f} °F`;
+    day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_f} to ${data.forecast.forecastday[index].day.maxtemp_f} °F`;
+  }
   day.weatherIcon.src = data.forecast.forecastday[index].day.condition.icon;
 }
 
-async function populateHourWeather(hour, location) {}
+// HOURLY
+const times = document.querySelectorAll(".hour .time");
+const avgTemps = document.querySelectorAll(".hour .avgTemp");
+const weatherIcons = document.querySelectorAll(".hour .weatherIcon");
 
+async function populateHourWeather(hour, data) {
+  times[hour].textContent = data.forecast.forecastday[0].hour[hour].time.split(" ")[1];
+  if (celcius) {
+    avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_c} °C`;
+  } else {
+    avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_f} °F`;
+  }
+  weatherIcons[hour].src = data.forecast.forecastday[0].hour[hour].condition.icon;
+}
+
+// BOTH
 async function populateWeather(location) {
-  populateDayWeather(day0, 0, location);
-  populateDayWeather(day1, 1, location);
-  populateDayWeather(day2, 2, location);
+  const data = await getNext3DaysWeather(location);
+
+  populateDayWeather(day0, 0, data);
+  populateDayWeather(day1, 1, data);
+  populateDayWeather(day2, 2, data);
+
+  for (let i = 0; i < 24; i++) {
+    populateHourWeather(i, data);
+  }
 }
 
 export { populateWeather };

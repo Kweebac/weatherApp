@@ -1,9 +1,13 @@
+import { populateWeather } from "./DOM";
+
 const dailyButton = document.querySelector(".dailyButton");
 const hourlyButton = document.querySelector(".hourlyButton");
 const changeTempButton = document.querySelector(".changeTemp");
 
 const dailyContainer = document.querySelector(".daily");
 const hourlyContainer = document.querySelector(".hourly");
+
+let celcius = true;
 
 function addEventListeners() {
   dailyButton.addEventListener("click", () => {
@@ -25,16 +29,17 @@ function addEventListeners() {
     dailyContainer.style.position = "absolute";
   });
 
-  let celcius = false;
   changeTempButton.addEventListener("click", () => {
     if (celcius) {
+      populateWeather("London");
       changeTempButton.textContent = "Display °F";
       celcius = false;
     } else {
       changeTempButton.textContent = "Display °C";
+      populateWeather("London");
       celcius = true;
     }
   });
 }
 
-export { addEventListeners };
+export { addEventListeners, celcius };
