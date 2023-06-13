@@ -1,6 +1,9 @@
 :root {
   font-family: sans-serif;
 }
+* {
+  box-sizing: border-box;
+}
 
 body {
   background: url(../images/juli-kosolapova-pZ-XFIrJMtE-unsplash.jpg) no-repeat center center
@@ -17,29 +20,50 @@ header {
 
 /* DAILY */
 .daily {
+  height: 9rem;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(7, 8rem);
+  grid-template-columns: repeat(7, 6.75rem);
   justify-content: space-around;
   gap: 1rem;
+}
+.day .avgTemp {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 /* HOURLY */
 .hourly {
   position: absolute;
   visibility: hidden;
+  height: 9rem;
+  padding-top: 2rem;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-around;
+  align-content: start;
+  gap: 0.5rem;
+}
+.hour {
+  display: grid;
+  justify-items: center;
+
+  min-width: 2.8rem;
+}
+.hour .avgTemp {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.time {
+  font-size: 1.1rem;
 }
 
 /* BOTH */
-.time,
 .dayOfWeek {
   font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 0.75rem;
-}
-.avgTemp {
-  font-size: 2rem;
-  font-weight: 700;
 }
 .tempDifference {
   font-size: 0.8rem;

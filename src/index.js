@@ -10,10 +10,15 @@ Change the look of the page based on data (change color of background or images 
 5 Add any styling you like!
 6 Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API.
   Use DevTools to test for low-end devices.
+
+TO-DO
+Add hourly section
+Add anything else related to temperatures
+Finish C to F button
 */
 
-import { addEventListeners } from "./DOM";
-import { populateDailyWeather } from "./weather";
+import { addEventListeners } from "./eventListeners";
+import { populateWeather } from "./DOM";
 
 addEventListeners();
-populateDailyWeather("london");
+populateWeather("London");
