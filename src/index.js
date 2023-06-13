@@ -17,8 +17,9 @@ Add anything else related to temperatures
 Finish C to F button
 */
 
-import { addEventListeners } from "./eventListeners";
-import { populateWeather } from "./DOM";
+import { addEventListeners } from "./modules/eventListeners";
+import { populateWeather } from "./modules/DOM";
+import "./style.css";
 
 addEventListeners();
 populateWeather("London");
