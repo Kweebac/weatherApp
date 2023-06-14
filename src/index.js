@@ -20,5 +20,7 @@ import "./style.css";
 import { addEventListeners, location } from "./modules/eventListeners";
 import { populateWeather } from "./modules/DOM";
 
-addEventListeners();
-populateWeather(location);
+(async () => {
+  addEventListeners();
+  await populateWeather(location);
+})();

@@ -1,5 +1,5 @@
 import { celcius } from "./eventListeners";
-import { handleError, getNext3DaysWeather } from "./fetchWeatherData";
+import { getNext3DaysWeather } from "./fetchWeatherData";
 
 // DAILY
 const day0 = {
@@ -21,8 +21,8 @@ const day2 = {
   weatherIcon: document.querySelector("#day2 .weatherIcon"),
 };
 
-function getDayName(data, dayIndex) {
-  const date = new Date(data.forecast.forecastday[dayIndex].date).getDay();
+function getDayName(dataValue, dayIndex) {
+  const date = new Date(dataValue.forecast.forecastday[dayIndex].date).getDay();
 
   return date === 0
     ? "Sunday"
@@ -39,16 +39,16 @@ function getDayName(data, dayIndex) {
     : "Saturday";
 }
 
-function populateDayWeather(day, index, data) {
-  day.dayOfWeek.textContent = getDayName(data, index);
+function populateDayWeather(day, index, dataValue) {
+  day.dayOfWeek.textContent = getDayName(dataValue, index);
   if (celcius) {
-    day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_c} °C`;
-    day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_c} to ${data.forecast.forecastday[index].day.maxtemp_c} °C`;
+    day.avgTemp.textContent = `${dataValue.forecast.forecastday[index].day.avgtemp_c} °C`;
+    day.tempDifference.textContent = `${dataValue.forecast.forecastday[index].day.mintemp_c} to ${dataValue.forecast.forecastday[index].day.maxtemp_c} °C`;
   } else {
-    day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_f} °F`;
-    day.tempDifference.textContent = `${data.forecast.forecastday[index].day.mintemp_f} to ${data.forecast.forecastday[index].day.maxtemp_f} °F`;
+    day.avgTemp.textContent = `${dataValue.forecast.forecastday[index].day.avgtemp_f} °F`;
+    day.tempDifference.textContent = `${dataValue.forecast.forecastday[index].day.mintemp_f} to ${dataValue.forecast.forecastday[index].day.maxtemp_f} °F`;
   }
-  day.weatherIcon.src = data.forecast.forecastday[index].day.condition.icon;
+  day.weatherIcon.src = dataValue.forecast.forecastday[index].day.condition.icon;
 }
 
 // HOURLY
@@ -56,14 +56,14 @@ const times = document.querySelectorAll(".hour .time");
 const avgTemps = document.querySelectorAll(".hour .avgTemp");
 const weatherIcons = document.querySelectorAll(".hour .weatherIcon");
 
-function populateHourWeather(hour, data) {
-  times[hour].textContent = data.forecast.forecastday[0].hour[hour].time.split(" ")[1];
+function populateHourWeather(hour, dataValue) {
+  times[hour].textContent = dataValue.forecast.forecastday[0].hour[hour].time.split(" ")[1];
   if (celcius) {
-    avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_c} °C`;
+    avgTemps[hour].textContent = `${dataValue.forecast.forecastday[0].hour[hour].temp_c} °C`;
   } else {
-    avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_f} °F`;
+    avgTemps[hour].textContent = `${dataValue.forecast.forecastday[0].hour[hour].temp_f} °F`;
   }
-  weatherIcons[hour].src = data.forecast.forecastday[0].hour[hour].condition.icon;
+  weatherIcons[hour].src = dataValue.forecast.forecastday[0].hour[hour].condition.icon;
 }
 
 // LEFT & RIGHT INFO
@@ -72,22 +72,27 @@ const leftLocation = document.querySelector(".left .location");
 const leftAvgTemp = document.querySelector(".left .avgTemp");
 const leftWeatherIcon = document.querySelector(".left .weatherIcon");
 
-function populateSides(data) {
-  leftWeatherStatus.textContent = data.current.condition.text;
-  leftLocation.textContent = data.location.name;
+function populateSides(dataValue) {
+  leftWeatherStatus.textContent = dataValue.current.condition.text;
+  leftLocation.textContent = dataValue.location.name;
   if (celcius) {
-    leftAvgTemp.textContent = `${data.current.temp_c} °C`;
+    leftAvgTemp.textContent = `${dataValue.current.temp_c} °C`;
   } else {
-    leftAvgTemp.textContent = `${data.current.temp_f} °F`;
+    leftAvgTemp.textContent = `${dataValue.current.temp_f} °F`;
   }
-  leftWeatherIcon.src = data.forecast.forecastday[0].day.condition.icon;
+  leftWeatherIcon.src = dataValue.forecast.forecastday[0].day.condition.icon;
 }
 
 // BOTH
 let data;
+
 async function populateWeather(location) {
-  data = await getNext3DaysWeather(location);
-  if (handleError(data)) return;
+  if (await getNext3DaysWeather(location)) {
+    data = await getNext3DaysWeather(location);
+    console.log(data);
+  } else {
+    return;
+  }
 
   populateDayWeather(day0, 0, data);
   populateDayWeather(day1, 1, data);
@@ -100,4 +105,4 @@ async function populateWeather(location) {
   populateSides(data);
 }
 
-export { populateWeather, data };
+export { populateWeather, populateDayWeather, populateHourWeather, data };

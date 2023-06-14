@@ -1,4 +1,4 @@
-import { populateWeather, data } from "./DOM";
+import { populateWeather, populateDayWeather, populateHourWeather, data } from "./DOM";
 import { handleError } from "./fetchWeatherData";
 
 const dailyButton = document.querySelector(".dailyButton");
@@ -38,20 +38,23 @@ function addEventListeners() {
     if (!handleError(data)) {
       if (celcius) {
         changeTempButton.textContent = "Display °C";
-        populateWeather(location);
+        populateDayWeather(data);
+        populateHourWeather(data);
         celcius = false;
       } else {
         changeTempButton.textContent = "Display °F";
-        populateWeather(location);
+        populateDayWeather(data);
+        populateHourWeather(data);
         celcius = true;
       }
     }
   };
 
-  form.onsubmit = (e) => {
+  form.onsubmit = async (e) => {
     e.preventDefault();
+
     location = locationInput.value;
-    populateWeather(location);
+    await populateWeather(location);
   };
 }
 
