@@ -89,7 +89,6 @@ let data;
 async function populateWeather(location) {
   if (await getNext3DaysWeather(location)) {
     data = await getNext3DaysWeather(location);
-    console.log(data);
   } else {
     return;
   }
@@ -105,4 +104,4 @@ async function populateWeather(location) {
   populateSides(data);
 }
 
-export { populateWeather, populateDayWeather, populateHourWeather, data };
+export { populateWeather, populateDayWeather, populateHourWeather, data, day0, day1, day2 };

@@ -1,4 +1,12 @@
-import { populateWeather, populateDayWeather, populateHourWeather, data } from "./DOM";
+import {
+  populateWeather,
+  populateDayWeather,
+  populateHourWeather,
+  data,
+  day0,
+  day1,
+  day2,
+} from "./DOM";
 import { handleError } from "./fetchWeatherData";
 
 const dailyButton = document.querySelector(".dailyButton");
@@ -35,17 +43,25 @@ function addEventListeners() {
   };
 
   changeTempButton.onclick = () => {
-    if (!handleError(data)) {
-      if (celcius) {
-        changeTempButton.textContent = "Display °C";
-        populateDayWeather(data);
-        populateHourWeather(data);
-        celcius = false;
-      } else {
-        changeTempButton.textContent = "Display °F";
-        populateDayWeather(data);
-        populateHourWeather(data);
-        celcius = true;
+    if (celcius) {
+      celcius = false;
+      changeTempButton.textContent = "Display °C";
+      populateDayWeather(day0, 0, data);
+      populateDayWeather(day1, 1, data);
+      populateDayWeather(day2, 2, data);
+
+      for (let i = 0; i < 24; i++) {
+        populateHourWeather(i, data);
+      }
+    } else {
+      celcius = true;
+      changeTempButton.textContent = "Display °F";
+      populateDayWeather(day0, 0, data);
+      populateDayWeather(day1, 1, data);
+      populateDayWeather(day2, 2, data);
+
+      for (let i = 0; i < 24; i++) {
+        populateHourWeather(i, data);
       }
     }
   };
