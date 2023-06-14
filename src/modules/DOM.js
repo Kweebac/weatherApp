@@ -39,7 +39,7 @@ function getDayName(data, dayIndex) {
     : "Saturday";
 }
 
-async function populateDayWeather(day, index, data) {
+function populateDayWeather(day, index, data) {
   day.dayOfWeek.textContent = getDayName(data, index);
   if (celcius) {
     day.avgTemp.textContent = `${data.forecast.forecastday[index].day.avgtemp_c} °C`;
@@ -56,7 +56,7 @@ const times = document.querySelectorAll(".hour .time");
 const avgTemps = document.querySelectorAll(".hour .avgTemp");
 const weatherIcons = document.querySelectorAll(".hour .weatherIcon");
 
-async function populateHourWeather(hour, data) {
+function populateHourWeather(hour, data) {
   times[hour].textContent = data.forecast.forecastday[0].hour[hour].time.split(" ")[1];
   if (celcius) {
     avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_c} °C`;
@@ -64,6 +64,23 @@ async function populateHourWeather(hour, data) {
     avgTemps[hour].textContent = `${data.forecast.forecastday[0].hour[hour].temp_f} °F`;
   }
   weatherIcons[hour].src = data.forecast.forecastday[0].hour[hour].condition.icon;
+}
+
+// LEFT & RIGHT INFO
+const leftWeatherStatus = document.querySelector(".left .weatherStatus");
+const leftLocation = document.querySelector(".left .location");
+const leftAvgTemp = document.querySelector(".left .avgTemp");
+const leftWeatherIcon = document.querySelector(".left .weatherIcon");
+
+function populateSides(data) {
+  leftWeatherStatus.textContent = data.current.condition.text;
+  leftLocation.textContent = data.location.name;
+  if (celcius) {
+    leftAvgTemp.textContent = `${data.current.temp_c} °C`;
+  } else {
+    leftAvgTemp.textContent = `${data.current.temp_f} °F`;
+  }
+  leftWeatherIcon.src = data.forecast.forecastday[0].day.condition.icon;
 }
 
 // BOTH
@@ -79,6 +96,8 @@ async function populateWeather(location) {
   for (let i = 0; i < 24; i++) {
     populateHourWeather(i, data);
   }
+
+  populateSides(data);
 }
 
 export { populateWeather, data };

@@ -12,8 +12,7 @@ Change the look of the page based on data (change color of background or images 
   Use DevTools to test for low-end devices.
 
 TO-DO
-Add location form
-Add other random API information
+Save previous data so you can switch temperatures with invalid input location
 */
 
 import "./normalize.css";

@@ -128,7 +128,8 @@ footer {
 
 /* LEFT */
 .left {
-  padding: 1rem;
+  color: wheat;
+  padding: 0rem 1rem;
 
   display: grid;
 }
@@ -139,10 +140,11 @@ form {
 input {
   background: none;
   border: none;
-  border-bottom: 3px solid white;
-  color: white;
+  border-bottom: 3px solid wheat;
+  color: wheat;
   font-size: 1.7rem;
   outline: none;
+  margin-top: 4rem;
 }
 output {
   justify-self: end;
@@ -152,6 +154,23 @@ output {
   color: rgb(255, 94, 94);
   font-weight: bold;
   height: 1.8rem;
+}
+
+.left .weatherStatus {
+  font-size: 2rem;
+}
+.left .location {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+}
+.left .avgTemp {
+  font-weight: bold;
+  font-size: 3rem;
+}
+.left .weatherIcon {
+  width: 6rem;
+  height: 6rem;
+  margin-top: 0;
 }
 
 /* RIGHT */
