@@ -67,8 +67,9 @@ async function populateHourWeather(hour, data) {
 }
 
 // BOTH
+let data;
 async function populateWeather(location) {
-  const data = await getNext3DaysWeather(location);
+  data = await getNext3DaysWeather(location);
   if (handleError(data)) return;
 
   populateDayWeather(day0, 0, data);
@@ -80,4 +81,4 @@ async function populateWeather(location) {
   }
 }
 
-export { populateWeather };
+export { populateWeather, data };
