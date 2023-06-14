@@ -12,14 +12,14 @@ Change the look of the page based on data (change color of background or images 
   Use DevTools to test for low-end devices.
 
 TO-DO
-Add hourly section
-Add anything else related to temperatures
-Finish C to F button
+Add location form
+Add other random API information
 */
 
 import { addEventListeners } from "./modules/eventListeners";
 import { populateWeather } from "./modules/DOM";
+import "./normalize.css";
 import "./style.css";
 
 addEventListeners();
-populateWeather("London");
+populateWeather("Illinois");

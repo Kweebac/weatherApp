@@ -32,11 +32,11 @@ function addEventListeners() {
   changeTempButton.addEventListener("click", () => {
     if (celcius) {
       changeTempButton.textContent = "Display °C";
-      populateWeather("London");
+      populateWeather("Illinois");
       celcius = false;
     } else {
       changeTempButton.textContent = "Display °F";
-      populateWeather("London");
+      populateWeather("Illinois");
       celcius = true;
     }
   });
