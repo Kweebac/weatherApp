@@ -16,10 +16,10 @@ Add location form
 Add other random API information
 */
 
-import { addEventListeners } from "./modules/eventListeners";
-import { populateWeather } from "./modules/DOM";
 import "./normalize.css";
 import "./style.css";
+import { addEventListeners, location } from "./modules/eventListeners";
+import { populateWeather } from "./modules/DOM";
 
 addEventListeners();
-populateWeather("Illinois");
+populateWeather(location);

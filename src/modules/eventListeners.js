@@ -7,10 +7,14 @@ const changeTempButton = document.querySelector(".changeTemp");
 const dailyContainer = document.querySelector(".daily");
 const hourlyContainer = document.querySelector(".hourly");
 
+const form = document.querySelector("form");
+const locationInput = document.querySelector("input");
+
 let celcius = true;
+let location = locationInput.value;
 
 function addEventListeners() {
-  dailyButton.addEventListener("click", () => {
+  dailyButton.onclick = () => {
     dailyButton.style.border = "2px solid black";
     hourlyButton.style.border = "none";
 
@@ -18,8 +22,8 @@ function addEventListeners() {
     hourlyContainer.style.visibility = "hidden";
     dailyContainer.style.position = "relative";
     hourlyContainer.style.position = "absolute";
-  });
-  hourlyButton.addEventListener("click", () => {
+  };
+  hourlyButton.onclick = () => {
     hourlyButton.style.border = "2px solid black";
     dailyButton.style.border = "none";
 
@@ -27,19 +31,25 @@ function addEventListeners() {
     dailyContainer.style.visibility = "hidden";
     hourlyContainer.style.position = "relative";
     dailyContainer.style.position = "absolute";
-  });
+  };
 
-  changeTempButton.addEventListener("click", () => {
+  changeTempButton.onclick = () => {
     if (celcius) {
       changeTempButton.textContent = "Display °C";
-      populateWeather("Illinois");
+      populateWeather(location);
       celcius = false;
     } else {
       changeTempButton.textContent = "Display °F";
-      populateWeather("Illinois");
+      populateWeather(location);
       celcius = true;
     }
-  });
+  };
+
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    location = locationInput.value;
+    populateWeather(location);
+  };
 }
 
-export { addEventListeners, celcius };
+export { addEventListeners, celcius, location };
