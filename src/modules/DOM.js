@@ -1,5 +1,5 @@
 import { celcius } from "./eventListeners";
-import { getNext3DaysWeather } from "./fetchWeatherData";
+import { handleError, getNext3DaysWeather } from "./fetchWeatherData";
 
 // DAILY
 const day0 = {
@@ -69,6 +69,7 @@ async function populateHourWeather(hour, data) {
 // BOTH
 async function populateWeather(location) {
   const data = await getNext3DaysWeather(location);
+  if (handleError(data)) return;
 
   populateDayWeather(day0, 0, data);
   populateDayWeather(day1, 1, data);
