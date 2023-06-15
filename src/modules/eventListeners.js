@@ -20,7 +20,7 @@ const form = document.querySelector("form");
 const locationInput = document.querySelector("input");
 
 let celcius = true;
-let location = locationInput.value;
+let location;
 
 function addEventListeners() {
   dailyButton.onclick = () => {

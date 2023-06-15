@@ -1,5 +1,5 @@
 import { celcius } from "./eventListeners";
-import { getNext3DaysWeather } from "./fetchWeatherData";
+import { getNext3DaysWeather, checkError } from "./fetchWeatherData";
 
 // DAILY
 const day0 = {
@@ -78,7 +78,7 @@ const rightRainChance = document.querySelector(".right .rainChance > div:last-ch
 const rightWindSpeed = document.querySelector(".right .windSpeed > div:last-child");
 
 function populateSides(dataValue) {
-  // LEFT
+  // LEFT SIDE
   leftWeatherStatus.textContent = dataValue.current.condition.text;
   leftLocation.textContent = dataValue.location.name;
   if (celcius) {
@@ -88,7 +88,7 @@ function populateSides(dataValue) {
   }
   leftWeatherIcon.src = dataValue.forecast.forecastday[0].day.condition.icon;
 
-  // RIGHT
+  // RIGHT SIDE
   if (celcius) {
     rightFeelsLike.textContent = `${dataValue.current.feelslike_c} °C`;
   } else {
@@ -102,8 +102,9 @@ function populateSides(dataValue) {
   rightWindSpeed.textContent = `${dataValue.current.wind_kph} km/h`;
 }
 
-// BOTH
+// DAILY & HOURLY
 let data;
+const locationErrorOutput = document.querySelector("input + output");
 
 async function populateWeather(location) {
   if (!checkError(await getNext3DaysWeather(location))) {

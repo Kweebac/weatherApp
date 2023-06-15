@@ -24,5 +24,5 @@ import { populateWeather } from "./modules/DOM";
 
 (async () => {
   addEventListeners();
-  await populateWeather(location);
+  // await populateWeather(location);
 })();
