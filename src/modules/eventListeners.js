@@ -7,7 +7,7 @@ import {
   day1,
   day2,
 } from "./DOM";
-import { handleError } from "./fetchWeatherData";
+import { handleError, checkError } from "./fetchWeatherData";
 
 const dailyButton = document.querySelector(".dailyButton");
 const hourlyButton = document.querySelector(".hourlyButton");
@@ -66,11 +66,15 @@ function addEventListeners() {
     }
   };
 
+  const everything = document.querySelectorAll("body > *");
   form.onsubmit = async (e) => {
     e.preventDefault();
 
     location = locationInput.value;
     await populateWeather(location);
+    if (!checkError(data)) {
+      everything.forEach((item) => (item.style.visibility = "visible"));
+    }
   };
 }
 

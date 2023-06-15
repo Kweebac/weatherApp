@@ -26,4 +26,12 @@ function handleError(data) {
   }
 }
 
-export { getNext3DaysWeather, handleError };
+function checkError(data) {
+  if (data.error) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export { getNext3DaysWeather, handleError, checkError };

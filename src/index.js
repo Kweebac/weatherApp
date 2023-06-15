@@ -12,7 +12,9 @@ Change the look of the page based on data (change color of background or images 
   Use DevTools to test for low-end devices.
 
 TO-DO
-Save previous data so you can switch temperatures with invalid input location
+Make it so if you have no location set it doesn't look ugly
+Add loading component
+Fix right side stuff
 */
 
 import "./normalize.css";

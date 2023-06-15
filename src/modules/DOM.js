@@ -72,7 +72,13 @@ const leftLocation = document.querySelector(".left .location");
 const leftAvgTemp = document.querySelector(".left .avgTemp");
 const leftWeatherIcon = document.querySelector(".left .weatherIcon");
 
+const rightFeelsLike = document.querySelector(".right .feelsLike > div:last-child");
+const rightHumidity = document.querySelector(".right .humidity > div:last-child");
+const rightRainChance = document.querySelector(".right .rainChance > div:last-child");
+const rightWindSpeed = document.querySelector(".right .windSpeed > div:last-child");
+
 function populateSides(dataValue) {
+  // LEFT
   leftWeatherStatus.textContent = dataValue.current.condition.text;
   leftLocation.textContent = dataValue.location.name;
   if (celcius) {
@@ -81,6 +87,19 @@ function populateSides(dataValue) {
     leftAvgTemp.textContent = `${dataValue.current.temp_f} °F`;
   }
   leftWeatherIcon.src = dataValue.forecast.forecastday[0].day.condition.icon;
+
+  // RIGHT
+  if (celcius) {
+    rightFeelsLike.textContent = `${dataValue.current.feelslike_c} °C`;
+  } else {
+    rightFeelsLike.textContent = `${dataValue.current.feelslike_f} °F`;
+  }
+  rightHumidity.textContent = `${dataValue.current.humidity} %`;
+  rightRainChance.textContent = `${
+    dataValue.forecast.forecastday[0].hour[new Date(dataValue.location.localtime).getHours()]
+      .chance_of_rain
+  } %`;
+  rightWindSpeed.textContent = `${dataValue.current.wind_kph} km/h`;
 }
 
 // BOTH
