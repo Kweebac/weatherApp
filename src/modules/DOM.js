@@ -106,9 +106,13 @@ function populateSides(dataValue) {
 let data;
 
 async function populateWeather(location) {
-  if (await getNext3DaysWeather(location)) {
+  if (!checkError(await getNext3DaysWeather(location))) {
+    locationErrorOutput.textContent = "";
+    locationErrorOutput.style.backgroundColor = "";
     data = await getNext3DaysWeather(location);
   } else {
+    locationErrorOutput.textContent = "Invalid location";
+    locationErrorOutput.style.backgroundColor = "black";
     return;
   }
 

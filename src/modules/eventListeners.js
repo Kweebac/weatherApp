@@ -7,7 +7,7 @@ import {
   day1,
   day2,
 } from "./DOM";
-import { handleError, checkError } from "./fetchWeatherData";
+import { checkError } from "./fetchWeatherData";
 
 const dailyButton = document.querySelector(".dailyButton");
 const hourlyButton = document.querySelector(".hourlyButton");

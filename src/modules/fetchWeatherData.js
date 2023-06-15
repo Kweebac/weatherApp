@@ -3,28 +3,13 @@ async function getNext3DaysWeather(location) {
     `https://api.weatherapi.com/v1/forecast.json?key=3cd48fd5a1fe4c29b92135531230806&q=${location}&days=3`,
     { mode: "cors" }
   );
-  const dataJSON = await fetchData.json();
+  const data = await fetchData.json();
 
-  if (handleError(dataJSON)) {
-    return false;
-  } else {
-    return dataJSON;
-  }
+  if (checkError(data)) return false;
+  else return data;
 }
 
 const locationErrorOutput = document.querySelector("input + output");
-
-function handleError(data) {
-  if (data.error) {
-    locationErrorOutput.textContent = "Invalid location";
-    locationErrorOutput.style.backgroundColor = "black";
-    return true;
-  } else {
-    locationErrorOutput.textContent = "";
-    locationErrorOutput.style.backgroundColor = "";
-    return false;
-  }
-}
 
 function checkError(data) {
   if (data.error) {
@@ -34,4 +19,4 @@ function checkError(data) {
   }
 }
 
-export { getNext3DaysWeather, handleError, checkError };
+export { getNext3DaysWeather, checkError };
