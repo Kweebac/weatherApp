@@ -20,9 +20,7 @@ Fix right side stuff
 import "./normalize.css";
 import "./style.css";
 import { addEventListeners, location } from "./modules/eventListeners";
-import { populateWeather } from "./modules/DOM";
 
 (async () => {
   addEventListeners();
-  // await populateWeather(location);
 })();

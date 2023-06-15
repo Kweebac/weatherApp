@@ -67,14 +67,20 @@ function addEventListeners() {
   };
 
   const everything = document.querySelectorAll("body > *");
+  const loadingIcon = document.querySelector("form > svg");
+
   form.onsubmit = async (e) => {
     e.preventDefault();
+
+    loadingIcon.style.visibility = "visible";
 
     location = locationInput.value;
     await populateWeather(location);
     if (!checkError(data)) {
       everything.forEach((item) => (item.style.visibility = "visible"));
     }
+
+    loadingIcon.style.visibility = "hidden";
   };
 }
 

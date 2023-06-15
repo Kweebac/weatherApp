@@ -142,6 +142,8 @@ footer {
   display: grid;
 }
 form {
+  position: relative;
+
   display: grid;
   gap: 0.5rem;
 }
@@ -208,4 +210,11 @@ output {
 }
 .right div > div:first-of-type {
   align-self: end;
+}
+
+input + svg {
+  width: 2rem;
+  position: absolute;
+  right: -0.9rem;
+  top: 4.9rem;
 }

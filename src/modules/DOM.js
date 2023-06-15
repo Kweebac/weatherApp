@@ -104,7 +104,7 @@ function populateSides(dataValue) {
 
 // DAILY & HOURLY
 let data;
-const locationErrorOutput = document.querySelector("input + output");
+const locationErrorOutput = document.querySelector("form > output");
 
 async function populateWeather(location) {
   if (!checkError(await getNext3DaysWeather(location))) {
